@@ -87,6 +87,7 @@ update-buildroot-packages:
 update:update-deps update-buildroot-config update-buildroot-packages
 
 git-update-all:
+	git submodule init
 	git submodule update --recursive --remote
 
 git-pull:
