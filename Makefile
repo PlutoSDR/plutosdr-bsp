@@ -33,8 +33,8 @@ build:
 ### Buildroot ###
 
 buildroot/output/images/rootfs.cpio.gz:
-	@echo device-fw $(VERSION)> $(CURDIR)/buildroot/board/pluto/VERSIONS
-	@$(foreach dir,$(VSUBDIRS),echo $(dir) $(shell cd $(dir) && git describe --abbrev=4 --dirty --always --tags) >> $(CURDIR)/buildroot/board/pluto/VERSIONS;)
+	cp -f build/VERSIONS buildroot/board/pluto
+	echo buildroot $(shell git describe --abbrev=4 --dirty --always --tags)>> $(CURDIR)/buildroot/board/pluto/VERSIONS
 	make -C buildroot ARCH=arm zynq_pluto_defconfig
 	make -C buildroot TOOLCHAIN_EXTERNAL_INSTALL_DIR= ARCH=arm CROSS_COMPILE=$(CROSS_COMPILE) BUSYBOX_CONFIG_FILE=$(CURDIR)/buildroot/board/pluto/busybox-1.25.0.config all
 
