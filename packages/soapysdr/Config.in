@@ -1,6 +1,5 @@
 config BR2_PACKAGE_SOAPYSDR
 	bool "soapysdr"
-	select BR2_PACKAGE_LIBIIO
 	help
 	  Vendor and platform neutral SDR support library
 

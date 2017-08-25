@@ -1915,6 +1915,8 @@ menu "Applications and Tools for PlutoSDR & M2k"
 	source "package/libad9361-iio/Config.in"
 	source "package/dump1090/Config.in"
 	source "package/soapysdr/Config.in"
+	source "package/soapyplutosdr/Config.in"
+	source "package/soapyremote/Config.in"
 endmenu
 
 endmenu
