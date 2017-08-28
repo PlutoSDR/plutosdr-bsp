@@ -1917,6 +1917,7 @@ menu "Applications and Tools for PlutoSDR & M2k"
 	source "package/soapysdr/Config.in"
 	source "package/soapyplutosdr/Config.in"
 	source "package/soapyremote/Config.in"
+	source "package/rxtools/Config.in"
 endmenu
 
 endmenu
