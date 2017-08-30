@@ -1918,6 +1918,7 @@ menu "Applications and Tools for PlutoSDR & M2k"
 	source "package/soapyplutosdr/Config.in"
 	source "package/soapyremote/Config.in"
 	source "package/rxtools/Config.in"
+	source "package/csdr/Config.in"
 endmenu
 
 endmenu
