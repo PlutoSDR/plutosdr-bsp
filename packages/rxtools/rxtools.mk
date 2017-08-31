@@ -3,7 +3,7 @@
 # RXTOOLS
 #
 ################################################################################
-RXTOOLS_VERSION = master
+RXTOOLS_VERSION = 571cc9aeccb2004d81032cea484324aacb1a5852
 RXTOOLS_SITE = https://github.com/rxseger/rx_tools.git
 RXTOOLS_SITE_METHOD = git
 
