@@ -10,10 +10,15 @@ CSDR_SITE_METHOD = git
 CSDR_LICENSE = BSD-3c
 CSDR_DEPENDENCIES = fftw
 
+ifeq ($(BR2_ARM_CPU_HAS_NEON),y)
+CSDR_CFLAGS += -mfpu=neon -mvectorize-with-neon-quad -funsafe-math-optimizations
+endif
+
+
 define CSDR_BUILD_CMDS
-	$(TARGET_CC) -std=gnu99 $(TARGET_CFLAGS) $(TARGET_LDFLAGS) $(@D)/fft_fftw.c $(@D)/libcsdr_wrapper.c -lm -lrt -lfftw3f -DUSE_FFTW -DLIBCSDR_GPL -DUSE_IMA_ADPCM  -fpic -shared -Wl,-soname,libcsdr.so -o $(@D)/libcsdr.so
-	$(TARGET_CC) -std=gnu99 $(@D)/csdr.c $(TARGET_CFLAGS) $(TARGET_LDFLAGS) -lm -lrt -lfftw3f -DUSE_FFTW -DLIBCSDR_GPL -DUSE_IMA_ADPCM -L$(@D) -lcsdr -ffast-math -fdump-tree-vect-details -o  $(@D)/csdr
-	$(TARGET_CXX)  $(@D)/nmux.cpp $(@D)/tsmpool.cpp -L$(@D) -lcsdr -lpthread  -o  $(@D)/nmux
+	$(TARGET_CC) -std=gnu99 $(TARGET_CFLAGS) $(TARGET_LDFLAGS) $(CSDR_CFLAGS) $(@D)/fft_fftw.c $(@D)/libcsdr_wrapper.c -lm -lrt -lfftw3f -DUSE_FFTW -DLIBCSDR_GPL -DUSE_IMA_ADPCM  -fpic -shared -Wl,-soname,libcsdr.so -o $(@D)/libcsdr.so
+	$(TARGET_CC) -std=gnu99 $(@D)/csdr.c $(TARGET_CFLAGS) $(TARGET_LDFLAGS) $(CSDR_CFLAGS) -lm -lrt -lfftw3f -DUSE_FFTW -DLIBCSDR_GPL -DUSE_IMA_ADPCM -L$(@D) -lcsdr -ffast-math -fdump-tree-vect-details -o  $(@D)/csdr
+	$(TARGET_CXX)  $(@D)/nmux.cpp $(@D)/tsmpool.cpp $(CSDR_CFLAGS) -L$(@D) -lcsdr -lpthread  -o  $(@D)/nmux
 endef
 
 define CSDR_INSTALL_TARGET_CMDS
